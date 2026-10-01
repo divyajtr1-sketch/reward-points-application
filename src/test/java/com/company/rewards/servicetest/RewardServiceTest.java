@@ -51,42 +51,42 @@ public class RewardServiceTest {
     }
 
     @Test
-    public void shouldCalculateZeroPointsFor50OrLess() {
+    public void CalculateZeroPointsFor50OrLess() {
         assertEquals(0, rewardService.calculatePoints(new BigDecimal("50")));
         assertEquals(0, rewardService.calculatePoints(new BigDecimal("40")));
     }
 
     @Test
-    public void shouldCalculateOnePointPerDollarBetween50And100() {
+    public void CalculateOnePointPerDollarBetween50And100() {
         assertEquals(25, rewardService.calculatePoints(new BigDecimal("75")));
         assertEquals(50, rewardService.calculatePoints(new BigDecimal("100")));
     }
 
     @Test
-    public void shouldCalculateTwoPointsPerDollarAbove100() {
+    public void CalculateTwoPointsPerDollarAbove100() {
         assertEquals(90, rewardService.calculatePoints(new BigDecimal("120")));
         assertEquals(250, rewardService.calculatePoints(new BigDecimal("200")));
     }
 
     @Test
-    public void shouldIgnoreFractionalDollarForPoints() {
+    public void IgnoreFractionalDollarForPoints() {
         assertEquals(25, rewardService.calculatePoints(new BigDecimal("75.99")));
     }
 
     @Test
-    public void shouldRejectNegativeAmount() {
+    public void RejectNegativeAmountTest() {
         assertThrows(IllegalArgumentException.class,
                 () -> rewardService.calculatePoints(new BigDecimal("-1")));
     }
 
     @Test
-    public void shouldRejectNullAmount() {
+    public void RejectNullAmountTest() {
         assertThrows(IllegalArgumentException.class,
                 () -> rewardService.calculatePoints(null));
     }
 
     @Test
-    public void shouldCalculateRewardsForAllCustomersAcrossRequestedMonths() {
+    public void CalculateRewardsForAllCustomersAcrossRequestedMonths() {
         LocalDate from = LocalDate.of(2026, 7, 1);
         LocalDate to = LocalDate.of(2026, 9, 30);
 
@@ -114,7 +114,7 @@ public class RewardServiceTest {
     }
 
     @Test
-    public void shouldCalculateRewardsForSingleCustomer() {
+    public void CalculateRewardsForSingleCustomer() {
         LocalDate from = LocalDate.of(2026, 7, 1);
         LocalDate to = LocalDate.of(2026, 9, 30);
 
@@ -135,7 +135,7 @@ public class RewardServiceTest {
     }
 
     @Test
-    public void shouldThrowCustomerNotFoundException() {
+    public void ThrowCustomerNotFoundException() {
         when(customerRepository.findById(999L)).thenReturn(Optional.empty());
 
         assertThrows(CustomerNotFoundException.class, () -> rewardService.calculateCustomerRewards(
@@ -143,7 +143,7 @@ public class RewardServiceTest {
     }
 
     @Test
-    public void shouldRejectInvalidDateRange() {
+    public void RejectInvalidDateRangeTest() {
         LocalDate from = LocalDate.of(2026, 9, 30);
         LocalDate to = LocalDate.of(2026, 7, 1);
 
@@ -152,7 +152,7 @@ public class RewardServiceTest {
     }
 
     @Test
-    public void shouldRejectNullDates() {
+    public void RejectNullDatesTest() {
         assertThrows(InvalidDateRangeException.class,
                 () -> rewardService.calculateRewards(null, LocalDate.of(2026, 9, 30)));
     }
