@@ -57,7 +57,7 @@ public class RewardControllerIntegrationTest {
     }
 
     @Test
-    public void shouldReturnMonthlyAndTotalRewards() throws Exception {
+    public void ReturnMonthlyAndTotalRewards() throws Exception {
         mockMvc.perform(get("/api/rewards")
                         .param("from", "2026-07-01")
                         .param("to", "2026-09-30"))
@@ -73,7 +73,7 @@ public class RewardControllerIntegrationTest {
     }
 
     @Test
-    public void shouldReturnBadRequestForInvalidDateRange() throws Exception {
+    public void ReturnBadRequestForInvalidDateRange() throws Exception {
         mockMvc.perform(get("/api/rewards")
                         .param("from", "2026-09-30")
                         .param("to", "2026-07-01"))
@@ -82,7 +82,7 @@ public class RewardControllerIntegrationTest {
     }
 
     @Test
-    public void shouldReturnNotFoundForUnknownCustomer() throws Exception {
+    public void ReturnNotFoundForUnknownCustomer() throws Exception {
         mockMvc.perform(get("/api/rewards/999999")
                         .param("from", "2026-07-01")
                         .param("to", "2026-09-30"))
