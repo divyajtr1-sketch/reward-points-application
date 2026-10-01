@@ -34,7 +34,7 @@ public class RewardControllerTest {
     private RewardService rewardService;
 
     @Test
-    public void shouldReturnRewardsForAllCustomers() throws Exception {
+    public void ReturnRewardsForAllCustomers() throws Exception {
         RewardResponse response = new RewardResponse(
                 LocalDate.of(2026, 7, 1),
                 LocalDate.of(2026, 9, 30),
@@ -62,7 +62,7 @@ public class RewardControllerTest {
     }
 
     @Test
-    public void shouldReturnRewardsForSingleCustomer() throws Exception {
+    public void ReturnRewardsForSingleCustomer() throws Exception {
         CustomerReward response = new CustomerReward(
                 1L,
                 "Alice",
@@ -83,7 +83,7 @@ public class RewardControllerTest {
     }
 
     @Test
-    public void shouldReturnBadRequestWhenServiceRejectsDateRange() throws Exception {
+    public void ReturnBadRequestWhenServiceRejectsDateRange() throws Exception {
         when(rewardService.calculateRewards(
                 LocalDate.of(2026, 9, 30), LocalDate.of(2026, 7, 1)))
                 .thenThrow(new InvalidDateRangeException("'from' date cannot be after 'to' date"));
@@ -96,7 +96,7 @@ public class RewardControllerTest {
     }
 
     @Test
-    public void shouldReturnNotFoundWhenCustomerDoesNotExist() throws Exception {
+    public void ReturnNotFoundWhenCustomerDoesNotExist() throws Exception {
         when(rewardService.calculateCustomerRewards(
                 999L, LocalDate.of(2026, 7, 1), LocalDate.of(2026, 9, 30)))
                 .thenThrow(new CustomerNotFoundException(999L));
@@ -109,7 +109,7 @@ public class RewardControllerTest {
     }
 
     @Test
-    public void shouldReturnBadRequestWhenDateParameterIsMissing() throws Exception {
+    public void ReturnBadRequestWhenDateParameterIsMissing() throws Exception {
         mockMvc.perform(get("/api/rewards")
                         .param("from", "2026-07-01"))
                 .andExpect(status().isBadRequest());
