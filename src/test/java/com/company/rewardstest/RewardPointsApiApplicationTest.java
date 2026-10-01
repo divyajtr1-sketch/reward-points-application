@@ -20,7 +20,7 @@ public class RewardPointsApiApplicationTest {
     }
 
     @Test
-    public void shouldStartSpringBootApplication() {
+    public void StartSpringBootApplication() {
     	RewardPointsApiApplication.main(new String[] {});
         assertNotNull(applicationContext);
         assertNotNull(applicationContext.getBean(RewardPointsApiApplication.class));
